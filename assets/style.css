@@ -399,7 +399,8 @@ a {
     flex-direction: column;
     align-items: stretch;
     gap: 28px;
-    padding-block: 44px 40px;
+    /* バナーを下端まで見せるため、下側の余白は持たせない */
+    padding-block: 44px 0;
   }
 
   .hero__content {
@@ -407,15 +408,23 @@ a {
     order: 1;
   }
 
+  /* 画面の横幅いっぱいに表示する（.wrap の左右パディングを打ち消す） */
   .hero__banner {
     flex: 1 1 auto;
     order: 2;
-    width: 100%;
+    width: auto;
+    margin-inline: -20px;
   }
 
-  /* 縦積みになると左右の隣接がなくなるため、溶け込ませる処理は解除する */
+  /* 縦積みになると左右の隣接がなくなるため、溶け込ませる処理は解除する。
+     左端の余白だけを切り落とし、ロゴと選手の両方が入る位置で拡大する */
   .hero__banner img {
-    border-radius: var(--radius-sm);
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: 40% center;
+    border-radius: 0;
+    box-shadow: none;
     -webkit-mask-image: none;
     mask-image: none;
   }
